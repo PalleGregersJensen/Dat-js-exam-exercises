@@ -6,19 +6,21 @@ let students = [];
 
 function start() {
   console.log("JS kører");
-  document.querySelector("#create-student-form").addEventListener("submit", createStudentObject);
+  document.querySelector("#create-student-form").addEventListener("submit", submitButtonClicked);
 }
 
-function createStudentObject(event) {
+function submitButtonClicked(event) {
   event.preventDefault();
   const form = event.target;
-
-  const name = form.name;
-  const age = form.age;
-  const email = form.email;
-  students.push(newStudent);
-    console.log(students);
-    
+  const name = form.name.value; // Tilføj ".value" for at få værdien af input-feltet
+  const age = form.age.value; // Tilføj ".value" for at få værdien af input-feltet
+  const email = form.email.value; // Tilføj ".value" for at få værdien af input-feltet
+  createStudentObject(name, age, email);
+  form.reset(); // Nulstil formular efter indsendelse
 }
 
-function handleCreateButton() {}
+function createStudentObject(name, age, email) {
+  const newStudent = { name, age, email }; // Opret et nyt objekt med de angivne egenskaber
+  students.push(newStudent);
+  console.log(students);
+}
