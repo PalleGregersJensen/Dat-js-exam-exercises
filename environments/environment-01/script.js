@@ -6,6 +6,8 @@
 // 2. Lav en funktion der viser listen på websiden - hver user skal vises med navn og hvorvidt de er aktive eller ej.
 // 3. Filtrér listen så den kun viser admin-brugere.
 
+
+
 "use strict";
 
 window.addEventListener("load", start);
@@ -17,7 +19,7 @@ async function start() {
   users = await getJsonFile();
   console.log(users);
   users.forEach(showUsers);
-  showAdmins();
+//   showAdmins();
 }
 
 async function getJsonFile() {
@@ -32,13 +34,12 @@ function showUsers(user) {
   const usersHtml = /*html*/ `<li>${user.name} - ${user.active}</li>`;
   document.querySelector("#user-count").insertAdjacentHTML("beforeend", usersHtml);
 
-  const admins = users.filter(showAdmins(user));
+  const admins = users.filter(showAdmins);
   console.log(admins);
 }
 
-function showAdmins() {
-  const admins = users.filter(function (user) {
-    return user.role === "admin";
-  });
-  console.log(admins);
+function showAdmins(user) {
+    if (user.role === "admin") {
+        return true;
+  }
 }
