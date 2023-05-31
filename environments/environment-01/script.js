@@ -20,10 +20,10 @@ async function start() {
   users = await getJsonData();
   console.log(users);
   // users.forEach(showUsersOnWebsite);
-    showUsersOnWebsite();
-    countUsers();
-    countAdmins();
-    countGuets();
+  showUsersOnWebsite();
+  countUsers();
+  countAdmins();
+  countGuets();
 }
 
 async function getJsonData() {
@@ -42,32 +42,33 @@ function showUsersOnWebsite(user) {
 }
 
 function countUsers(user) {
-    console.log("kaldes denne funktion?")
-    for (const user of users) {
-        if (user.role === "user") {
-            userCount++;
-            console.log(userCount);
-        }
-        console.log(userCount);
-        return userCount;
+  console.log("kaldes denne funktion?");
+  for (const user of users) {
+    if (user.role === "user") {
+      userCount++;
+      console.log(userCount);
     }
+    console.log(userCount);
+    } document.querySelector("#user-count").textContent = userCount;
 }
 function countAdmins(user) {
-    console.log("kaldes denne funktion?")
-    for (const user of users) {
-        if (user.role === "admin") {
-            adminCount++;
-            console.log(adminCount);
-        }
+  console.log("kaldes denne funktion?");
+  for (const user of users) {
+    if (user.role === "admin") {
+      adminCount++;
+      console.log(adminCount);
     }
+  }
+  document.querySelector("#admin-count").textContent = adminCount;
 }
 
 function countGuets(user) {
-    console.log("kaldes denne funktion?")
-    for (const user of users) {
-        if (user.role === "guest") {
-            guestCount++;
-            console.log(guestCount);
-        }
+  console.log("kaldes denne funktion?");
+  for (const user of users) {
+    if (user.role === "guest") {
+      guestCount++;
+      console.log(guestCount);
     }
+  }
+  document.querySelector("#guest-count").textContent = guestCount;
 }
