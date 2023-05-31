@@ -7,7 +7,7 @@ window.addEventListener("load", start);
 function start() {
     console.log("js kører");
     console.log(listOfSongs);
-    document.querySelector("button").addEventListener("click", addSongToList);
+    document.querySelector("#add-song-form").addEventListener("submit", addSongToList);
 }
 
 function addSongToList(event) {
@@ -20,12 +20,14 @@ function addSongToList(event) {
     const newSong = songAddedInForm(artist, title, duration);
     console.log(newSong);
     listOfSongs.push(newSong);
-    console.log()
+    console.log(listOfSongs);
+    form.reset();
 }
 
 function songAddedInForm(artist, title, duration) {
-    const songObject = {
-      artist, title, duration
-    }
-    return songObject;
+    return {
+        artist: artist,
+        title: title,
+        duration: duration,
+    };
 }
