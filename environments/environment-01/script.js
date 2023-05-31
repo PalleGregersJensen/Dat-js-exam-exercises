@@ -17,6 +17,9 @@ async function start() {
   users = await getJsonFile();
   console.log(users);
   users.forEach(showUsers);
+  const admins = users.filter(filterAdmins);
+  console.log(admins);
+  admins.forEach(showAdmins);
 }
 
 async function getJsonFile() {
@@ -31,12 +34,15 @@ function showUsers(user) {
   const usersHtml = /*html*/ `<li>${user.name} - ${user.active}</li>`;
   document.querySelector("#user-count").insertAdjacentHTML("beforeend", usersHtml);
 
-  const admins = users.filter(filterAdmins);
-  console.log(admins);
 }
 
 function filterAdmins(user) {
   if (user.role === "admin") {
     return true;
   }
+}
+
+function showAdmins(admin) {
+  const adminsHtml = /*html*/ `<li>${admin.name} - ${admin.active}</li>`;
+  document.querySelector("#admin-count").insertAdjacentHTML("beforeend", adminsHtml);
 }
