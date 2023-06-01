@@ -14,7 +14,8 @@ let animals = [];
 
 function start() {
   console.log("JS kører");
-  document.querySelector("#create-form").addEventListener("submit", addAnimalToList);
+    document.querySelector("#create-form").addEventListener("submit", addAnimalToList);
+    console.log(animals);
 }
 
 function addAnimalToList(event) {
@@ -31,9 +32,19 @@ function addAnimalToList(event) {
   const animalObject = createAnimalObject(name, type, age);
   console.log(animalObject);
   animals.push(animalObject);
+  animals.pop;
   console.log(animals);
-    form.reset();
-    animals.forEach(showAnimalsOnWebsite);
+  form.reset();
+  //  showAnimalsOnWebsite(animals);
+
+  const animalsHtml =
+    /*html*/
+    `               <tr>
+                        <td>${animalObject.name}</td>
+                        <td>${animalObject.type}</td>
+                        <td>${animalObject.age}</td>
+                    </tr>`;
+  document.querySelector("table").insertAdjacentHTML("beforeend", animalsHtml);
 }
 
 function createAnimalObject(name, type, age) {
@@ -45,14 +56,14 @@ function createAnimalObject(name, type, age) {
   return animal;
 }
 
-function showAnimalsOnWebsite(animalObject) {
-  // document.querySelector("#list-container").innerHTML = "";
-  const animalsHtml =
-    /*html*/
-    `               <tr>
-                        <td>${animalObject.name}</td>
-                        <td>${animalObject.type}</td>
-                        <td>${animalObject.age}</td>
-                    </tr>`;
-  document.querySelector("#list-container").insertAdjacentHTML("beforeend", animalsHtml);
-}
+// function showAnimalsOnWebsite(animalObject) {
+// document.querySelector("#list-container").innerHTML = "";
+//   const animalsHtml =
+/*html*/
+//     `               <tr>
+//                         <td>${animalObject.name}</td>
+//                         <td>${animalObject.type}</td>
+//                         <td>${animalObject.age}</td>
+//                     </tr>`;
+//   document.querySelector("#list-container").insertAdjacentHTML("beforeend", animalsHtml);
+// }
