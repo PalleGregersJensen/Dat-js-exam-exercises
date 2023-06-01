@@ -15,8 +15,9 @@ let users = [];
 async function start() {
   console.log("JS kører");
   users = await getJsonData();
-    console.log(users);
-    users.forEach(showUsersOnWebsite);
+  console.log(users);
+  users.forEach(showUsersOnWebsite);
+  addNewObjectToArray("Torben", true, "Admin");
 }
 
 async function getJsonData() {
@@ -28,8 +29,18 @@ async function getJsonData() {
 }
 
 function showUsersOnWebsite(user) {
-    if(user.active === true) {
-  const userHtml = /*html*/ `<li>${user.name} - ${user.active}</li>`;
-  document.querySelector("#userlist").insertAdjacentHTML("beforeend", userHtml);
+  if (user.active === true) {
+    const userHtml = /*html*/ `<li>${user.name} - ${user.active}</li>`;
+    document.querySelector("#userlist").insertAdjacentHTML("beforeend", userHtml);
+  }
 }
+
+function addNewObjectToArray(name, active, role) {
+  const newUser = {
+    name: name,
+    active: active,
+    role: role,
+  };
+  users.push(newUser);
+  showUsersOnWebsite(newUser);
 }
