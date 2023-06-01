@@ -32,7 +32,7 @@ function addAnimalToList(event) {
   form.reset();
   animals.sort(sortByName);
   console.log(animals);
-  animals.forEach(showAnimalsOnWebsite);
+  showAnimalsOnWebsite(animals);
   console.log(animals);
 }
 
@@ -46,17 +46,21 @@ function createAnimalObject(name, type, age) {
 }
 
 function showAnimalsOnWebsite(animalObject) {
-  // document.querySelector("#list-container").innerHTML = "";
-  const animalsHtml =
-    /*html*/
-    `               <tr>
-                        <td>${animalObject.name}</td>
-                        <td>${animalObject.type}</td>
-                        <td>${animalObject.age}</td>
-                    </tr>`;
-  document.querySelector("table").insertAdjacentHTML("beforeend", animalsHtml);
-}
+  const listContainer = document.querySelector("table");
+  listContainer.innerHTML = ""; // Slet det eksisterende indhold
 
+  for (const animal of animals) {
+    const animalHtml =
+      /*html*/
+      `<tr>
+      <td>${animal.name}</td>
+      <td>${animal.type}</td>
+      <td>${animal.age}</td>
+    </tr>`;
+
+    listContainer.insertAdjacentHTML("beforeend", animalHtml); // Indsæt det senest tilføjede objekt
+  }
+}
 function sortByName(animal1, animal2) {
   const animalName1 = animal1.name.toLowerCase();
   const animalName2 = animal2.name.toLowerCase();
