@@ -13,36 +13,46 @@ window.addEventListener("load", start);
 let animals = [];
 
 function start() {
-    console.log("JS kører");
-    document.querySelector("#create-form").addEventListener("submit", addAnimalToList);    
-
+  console.log("JS kører");
+  document.querySelector("#create-form").addEventListener("submit", addAnimalToList);
 }
 
 function addAnimalToList(event) {
-    event.preventDefault();
-    console.log("Læses dette?")
-    const form = event.target;
-    // const name = form.animal-name.value;
-    // console.log(name);
-    // const age = form.animal-age.value;
-    // const type = form.animal-type.value;
-    const name = document.querySelector("#animal-name").value;
-    const age = document.querySelector("#animal-age").value;
-    const type = document.querySelector("#animal-type").value;
-    const animalObject = createAnimalObject(name, type, age);
-    console.log(animalObject);
-    animals.push(animalObject);
-    console.log(animals);
+  event.preventDefault();
+  console.log("Læses dette?");
+  const form = event.target;
+  // const name = form.animal-name.value;
+  // console.log(name);
+  // const age = form.animal-age.value;
+  // const type = form.animal-type.value;
+  const name = document.querySelector("#animal-name").value;
+  const age = document.querySelector("#animal-age").value;
+  const type = document.querySelector("#animal-type").value;
+  const animalObject = createAnimalObject(name, type, age);
+  console.log(animalObject);
+  animals.push(animalObject);
+  console.log(animals);
     form.reset();
+    animals.forEach(showAnimalsOnWebsite);
 }
 
-
-
 function createAnimalObject(name, type, age) {
-    const animal = {
-        name: name,
-        type: type,
-        age: age
-    }
-    return animal
+  const animal = {
+    name: name,
+    type: type,
+    age: age,
+  };
+  return animal;
+}
+
+function showAnimalsOnWebsite(animalObject) {
+  // document.querySelector("#list-container").innerHTML = "";
+  const animalsHtml =
+    /*html*/
+    `               <tr>
+                        <td>${animalObject.name}</td>
+                        <td>${animalObject.type}</td>
+                        <td>${animalObject.age}</td>
+                    </tr>`;
+  document.querySelector("#list-container").insertAdjacentHTML("beforeend", animalsHtml);
 }
