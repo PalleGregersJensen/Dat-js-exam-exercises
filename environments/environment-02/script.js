@@ -14,37 +14,26 @@ let animals = [];
 
 function start() {
   console.log("JS kører");
-    document.querySelector("#create-form").addEventListener("submit", addAnimalToList);
-    console.log(animals);
+  document.querySelector("#create-form").addEventListener("submit", addAnimalToList);
+  console.log(animals);
 }
 
 function addAnimalToList(event) {
   event.preventDefault();
   console.log("Læses dette?");
   const form = event.target;
-  // const name = form.animal-name.value;
-  // console.log(name);
-  // const age = form.animal-age.value;
-  // const type = form.animal-type.value;
   const name = document.querySelector("#animal-name").value;
   const age = document.querySelector("#animal-age").value;
   const type = document.querySelector("#animal-type").value;
   const animalObject = createAnimalObject(name, type, age);
   console.log(animalObject);
   animals.push(animalObject);
-  animals.pop;
   console.log(animals);
   form.reset();
-  //  showAnimalsOnWebsite(animals);
-
-  const animalsHtml =
-    /*html*/
-    `               <tr>
-                        <td>${animalObject.name}</td>
-                        <td>${animalObject.type}</td>
-                        <td>${animalObject.age}</td>
-                    </tr>`;
-  document.querySelector("table").insertAdjacentHTML("beforeend", animalsHtml);
+  animals.sort(sortByName);
+  console.log(animals);
+  animals.forEach(showAnimalsOnWebsite);
+  console.log(animals);
 }
 
 function createAnimalObject(name, type, age) {
@@ -56,14 +45,20 @@ function createAnimalObject(name, type, age) {
   return animal;
 }
 
-// function showAnimalsOnWebsite(animalObject) {
-// document.querySelector("#list-container").innerHTML = "";
-//   const animalsHtml =
-/*html*/
-//     `               <tr>
-//                         <td>${animalObject.name}</td>
-//                         <td>${animalObject.type}</td>
-//                         <td>${animalObject.age}</td>
-//                     </tr>`;
-//   document.querySelector("#list-container").insertAdjacentHTML("beforeend", animalsHtml);
-// }
+function showAnimalsOnWebsite(animalObject) {
+  // document.querySelector("#list-container").innerHTML = "";
+  const animalsHtml =
+    /*html*/
+    `               <tr>
+                        <td>${animalObject.name}</td>
+                        <td>${animalObject.type}</td>
+                        <td>${animalObject.age}</td>
+                    </tr>`;
+  document.querySelector("table").insertAdjacentHTML("beforeend", animalsHtml);
+}
+
+function sortByName(animal1, animal2) {
+  const animalName1 = animal1.name.toLowerCase();
+  const animalName2 = animal2.name.toLowerCase();
+  return animalName1.localeCompare(animalName2);
+}
