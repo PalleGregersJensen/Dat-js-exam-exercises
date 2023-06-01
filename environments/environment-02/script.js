@@ -17,15 +17,16 @@ let animalList = [
 ];
 
 function start() {
-    console.log("JS kører");
-    console.log(animalList);
-    const sortedAnimals = sortByAge();
-    showAnimalsAtWebsite(sortedAnimals)
+  console.log("JS kører");
+  console.log(animalList);
+  const sortedAnimals = sortByAge();
+  showAnimalsAtWebsite(sortedAnimals);
+  document.querySelector("#create-form").addEventListener("submit", addAnimalToArray);
 }
 
-function showAnimalsAtWebsite(animal) {
-    
-  for (const animal of animalList) {
+function showAnimalsAtWebsite(animals) {
+  document.querySelector("table").innerHTML = "";
+  for (const animal of animals) {
     const animalHtml =
       /*html*/
       `<tr>
@@ -38,8 +39,28 @@ function showAnimalsAtWebsite(animal) {
 }
 
 function sortByAge() {
-   animalList.sort(function (a, b) {
-     return a - b;
-   }); 
+  // Brug Array.sort() til at sortere efter alder
+  const sortedAnimals = animalList.sort((a, b) => a.age - b.age);
+  return sortedAnimals;
 }
 
+function addAnimalToArray(event) {
+  event.preventDefault();
+  console.log("button clicked");
+  const form = event.target;
+  const name = document.querySelector("#animal-name").value;
+  const type = document.querySelector("#animal-type").value;
+  const age = document.querySelector("#animal-age").value;
+  const animalObject = returnAnimalObject(name, type, age);
+  animalList.push(animalObject);
+  showAnimalsAtWebsite(animalList);
+}
+
+function returnAnimalObject(name, type, age) {
+const newAnimal = {
+  name: name,
+  type: type,
+  age: age,
+  };
+  return newAnimal;
+}
