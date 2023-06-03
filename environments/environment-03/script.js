@@ -8,3 +8,60 @@
 
 
 "use strict";
+
+const products = [
+  { name: "beer", price: 20, inStock: true },
+  { name: "flower", price: 10, inStock: true },
+  { name: "apples", price: 25, inStock: false },
+];
+
+console.log(products);
+
+window.addEventListener("load", start);
+
+function start() {
+    console.log("JS kører");
+    const sortedList = sortBytrue(products);
+    showProducts(products);
+    document.querySelector("#create-form").addEventListener("submit", addNewObjectToproductsArray)
+}
+
+function showProducts(productList) {
+    document.querySelector("#list-container").innerHTML = "";
+    for (const product of productList) {
+    const productsHtml = /*html*/ `<p>${product.name} - ${product.price} - ${product.inStock}</p>`;
+    document.querySelector("#list-container").insertAdjacentHTML("beforeend", productsHtml);
+}
+}
+
+function sortBytrue() {
+    products.sort(function (a, b) {
+      return b.inStock - a.inStock;
+    });
+}
+
+function addNewObjectToproductsArray(event) {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.elements["product-name"].value;
+    let price = form.elements["product-price"].value;
+    const stock = form.elements.stock.checked;
+    console.log(name);
+    console.log(price);
+    console.log(stock);
+    price = Number(price);
+    const newObject = createNewObject(name, price, stock)
+    products.push(newObject);
+    console.log(products);
+    form.reset();
+    showProducts(products);
+}
+
+function createNewObject(name, price, stock) {
+    const object = {
+        name: name,
+        price: price,
+        inStock: stock,
+    }
+    return object;
+}
