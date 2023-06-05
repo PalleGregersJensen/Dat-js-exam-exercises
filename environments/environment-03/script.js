@@ -9,7 +9,7 @@
 "use strict";
 
 const products = [
-  { name: "flouer", price: 20, inStock: true },
+  { name: "flour", price: 20, inStock: true },
   { name: "sugar", price: 15, inStock: false },
   { name: "flowers", price: 25, inStock: true },
 ];
@@ -20,11 +20,12 @@ window.addEventListener("load", start);
 
 function start() {
   console.log("JS kører");
-  document.querySelector("#select-sort-by option").addEventListener("change", handleSortBy);
+  document.querySelector("#select-sort-by").addEventListener("change", handleSortBy);
   showProducts(products);
 }
 
 function showProducts(productList) {
+  document.querySelector("#list-container").innerHTML = "";
   for (const product of productList) {
     const productHtml = /*html*/ `<P>${product.name} - ${product.price} - ${product.inStock}</P>`;
     document.querySelector("#list-container").insertAdjacentHTML("beforeend", productHtml);
@@ -32,26 +33,36 @@ function showProducts(productList) {
 }
 
 function handleSortBy() {
-  const selectElement = document.querySelector("#select-sort-by");
-  const selectedOption = selectElement.options[selectElement.selectedIndex].value;
+  const selectElement = document.querySelector("#select-sort-by").value;
+  console.log(selectElement);
 
-  if (selectedOption === "name") {
-    sortByName();
-  } else if (selectedOption === "price") {
-    sortByPrice();
-  } else if (selectedOption === "inStock") {
-    sortByStock();
+  if (selectElement === "name") {
+    const namesSorted = sortByName(products);
+    showProducts(namesSorted);
+  } else if (selectElement === "price") {
+    const pricesSorted = sortByPrice(products);
+    showProducts(pricesSorted);
+  } else if (selectElement === "inStock") {
+    const inStockSorted = sortByStock(products);
+    showProducts(inStockSorted);
+  } else {
   }
 }
 
 function sortByName() {
   console.log("Name selected");
+  products.sort((a, b) => a.name.localeCompare(b.name));
+  return products;
 }
 
 function sortByPrice() {
   console.log("Price selected");
+  products.sort((a, b) => a.price - b.price);
+  return products;
 }
 
 function sortByStock() {
   console.log("Stock selected");
+  products.sort((a, b) => b.inStock - a.inStock);
+  return products;
 }
