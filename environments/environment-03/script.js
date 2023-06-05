@@ -19,12 +19,9 @@ console.log(products);
 window.addEventListener("load", start);
 
 function start() {
-    console.log("JS kører");
-    document.querySelector("#select-sort-by option[value='name']").addEventListener("change", sortByName);
-    document.querySelector("#select-sort-by option[value='price']").addEventListener("change", sortByPrice);
-    document.querySelector("#select-sort-by option[value='inStock']").addEventListener("change", sortByStock);
-    showProducts(products);
-    
+  console.log("JS kører");
+  document.querySelector("#select-sort-by option").addEventListener("change", handleSortBy);
+  showProducts(products);
 }
 
 function showProducts(productList) {
@@ -34,8 +31,21 @@ function showProducts(productList) {
   }
 }
 
+function handleSortBy() {
+  const selectElement = document.querySelector("#select-sort-by");
+  const selectedOption = selectElement.options[selectElement.selectedIndex].value;
+
+  if (selectedOption === "name") {
+    sortByName();
+  } else if (selectedOption === "price") {
+    sortByPrice();
+  } else if (selectedOption === "inStock") {
+    sortByStock();
+  }
+}
+
 function sortByName() {
-    console.log("Name selected");
+  console.log("Name selected");
 }
 
 function sortByPrice() {
