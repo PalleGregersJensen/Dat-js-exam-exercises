@@ -20,9 +20,9 @@ window.addEventListener("load", start);
 
 function start() {
     console.log("JS kører");
-    document.querySelector("#select-sort-by option[value='name']").addEventListener("selected", sortByName);
-    document.querySelector("#select-sort-by option[value='price']").addEventListener("selected", sortByPrice);
-    document.querySelector("#select-sort-by option[value='inStock']").addEventListener("selected", sortByStock);
+    document.querySelector("#select-sort-by option[value='name']").addEventListener("change", sortByName);
+    document.querySelector("#select-sort-by option[value='price']").addEventListener("change", sortByPrice);
+    document.querySelector("#select-sort-by option[value='inStock']").addEventListener("change", sortByStock);
     showProducts(products);
     
 }
