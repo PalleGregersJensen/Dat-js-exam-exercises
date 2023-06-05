@@ -18,6 +18,7 @@ function start() {
 }
 
 function showCourses(courseList) {
+    document.querySelector("#courses-list").innerHTML = "";
   for (const course of courseList) {
     const courseHtml = /*html*/ `<li>${course.name} - ${course.ectsPoints}</li>`;
     document.querySelector("#courses-list").insertAdjacentHTML("beforeend", courseHtml);
@@ -32,19 +33,23 @@ function filterByEcts() {
   if (selectedValue === "5") {
     console.log("5 Ects valgt");
     const fiveEcts = courses.filter(filterByFiveEcts);
-    console.log(fiveEcts);
+      console.log(fiveEcts);
+      showCourses(fiveEcts);
   } else if (selectedValue === "10") {
     console.log("10 Ects valgt");
     const tenEcts = courses.filter(filterByTenEcts);
-    console.log(tenEcts);
+      console.log(tenEcts);
+      showCourses(tenEcts);
   } else if (selectedValue === "15") {
     console.log("15 Ects valgt");
     const fifteenEcts = courses.filter(filterByFifteenEcts);
-    console.log(fifteenEcts);
+      console.log(fifteenEcts);
+      showCourses(fifteenEcts);
   } else if (selectedValue === "20") {
     console.log("20 Ects valgt");
     const twentyEcts = courses.filter(filterByTwentyEcts);
-    console.log(twentyEcts);
+      console.log(twentyEcts);
+      showCourses(twentyEcts);
     }
 }
 
