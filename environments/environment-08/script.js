@@ -18,6 +18,7 @@ function start() {
   console.log("js kører");
   console.log(songList);
   document.querySelector("#add-song-form").addEventListener("submit", addSongToArray);
+  document.querySelector("#sort-songs-form").addEventListener("change", handleSortBy);
 }
 
 function addSongToArray(event) {
@@ -32,8 +33,7 @@ function addSongToArray(event) {
   songList.push(newSong);
   console.log(songList);
   showSongs(songList);
-    form.reset();
-    handleSortBy();
+  form.reset();
 }
 
 function createNewSong(artist, title, duration) {
@@ -54,7 +54,7 @@ function showSongs(songs) {
 }
 
 function handleSortBy() {
-    console.log("Handle sort by");
+  console.log("Handle sort by");
   const artistInHtml = document.querySelector("#sort-artist");
   console.log(artistInHtml);
   const titleInHtml = document.querySelector("#sort-title");
@@ -68,12 +68,12 @@ function handleSortBy() {
 
 function sortByArtist(songs) {
   console.log("sort by artist");
-    songs.sort((a, b) => a.artist.localeCompare(b.artist));
-    showSongs(songList)
+  songs.sort((a, b) => a.artist.localeCompare(b.artist));
+  showSongs(songList);
 }
 
 function sortByTitle(songs) {
   console.log("sort by title");
-    songs.sort((a, b) => a.title.localeCompare(b.title));
-    showSongs(songList)
+  songs.sort((a, b) => a.title.localeCompare(b.title));
+  showSongs(songList);
 }
