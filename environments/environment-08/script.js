@@ -30,7 +30,11 @@ function showSongs(songs) {
   for (const song of songs) {
     const songHtml = /*html*/ `<li>${song.artist} - ${song.title} - ${song.duration} <button>Upvote</button></li>`;
     document.querySelector("#songlist").insertAdjacentHTML("beforeend", songHtml);
-  }
+    }
+    document.querySelector("#songlist li:last-child button").addEventListener("click", upvoteSong)
+};
+
+
+function upvoteSong() {
+    console.log("button clciked");
 }
-
-
