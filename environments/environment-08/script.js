@@ -32,9 +32,28 @@ function showSongs(songs) {
     document.querySelector("#songlist").insertAdjacentHTML("beforeend", songHtml);
     }
     document.querySelector("#songlist li:last-child button").addEventListener("click", upvoteSong)
+
+ const upvoteButtons = document.querySelectorAll("#songlist li button");
+ for (const button of upvoteButtons) {
+   button.addEventListener("click", getToUpvoteSong);
+ }
+
 };
 
+function getToUpvoteSong() {
+  upvoteSong(songList)
+}
 
-function upvoteSong() {
-    console.log("button clciked");
+
+function upvoteSong(song) {
+  console.log("button clciked");
+  count++;
+  console.log(count);
+  sortByCount(songList)
+  console.log(songList);
+}
+
+function sortByCount(songs) {
+  console.log("point tilføjet");
+  songList.sort((a, b) => a.count - b.count);
 }
