@@ -30,7 +30,8 @@ function createStudentObject(event) {
     const newStudent = returnStudentObject(name, age, email);
     students.push(newStudent);
     console.log(students);
-    checkEmail();
+    checkEmail(newStudent);
+    console.log(students);
     form.reset();
 }
 
@@ -43,11 +44,12 @@ function returnStudentObject(name, age, email) {
     return student;
 }
 
-function checkEmail() {
-    const studentEmail = document.querySelector("#email").value;
+function checkEmail(studentObject) {
+    const studentEmail = studentObject.email;
     if (studentEmail.length >= 16 && studentEmail.endsWith("@stud.kea.dk")) {
       console.log("Student suucesfuldt oprettet");
     } else {
-      console.log("Oprettelse mislykkedes");
+        console.log("Oprettelse mislykkedes");
+        students.pop();
     }
 }
