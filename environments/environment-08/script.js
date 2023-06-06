@@ -30,25 +30,50 @@ function addSongToArray(event) {
   let newSong = createNewSong(artist, title, duration);
   console.log(newSong);
   songList.push(newSong);
-    console.log(songList);
+  console.log(songList);
+  showSongs(songList);
     form.reset();
-    showSongs(songList);
+    handleSortBy();
 }
 
 function createNewSong(artist, title, duration) {
   const song = {
     artist: artist,
-    title,
-    title,
+    title: title,
     duration: duration,
   };
   return song;
 }
 
 function showSongs(songs) {
-    document.querySelector("#songlist").innerHTML = "";
+  document.querySelector("#songlist").innerHTML = "";
   for (const song of songs) {
     const songHtml = /*html*/ `<li>${song.artist} - ${song.title} - ${song.duration}</li>`;
     document.querySelector("#songlist").insertAdjacentHTML("beforeend", songHtml);
   }
+}
+
+function handleSortBy() {
+    console.log("Handle sort by");
+  const artistInHtml = document.querySelector("#sort-artist");
+  console.log(artistInHtml);
+  const titleInHtml = document.querySelector("#sort-title");
+  console.log(titleInHtml);
+  if (titleInHtml.checked) {
+    sortByTitle(songList);
+  } else if (artistInHtml.checked) {
+    sortByArtist(songList);
+  }
+}
+
+function sortByArtist(songs) {
+  console.log("sort by artist");
+    songs.sort((a, b) => a.artist.localeCompare(b.artist));
+    showSongs(songList)
+}
+
+function sortByTitle(songs) {
+  console.log("sort by title");
+    songs.sort((a, b) => a.title.localeCompare(b.title));
+    showSongs(songList)
 }
