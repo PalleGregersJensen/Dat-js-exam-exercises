@@ -30,10 +30,15 @@ function showSongs(songs) {
   for (const song of songs) {
     const songHtml = /*html*/ `<li>${song.title} - ${song.artist} <button>Remove</button></li>`;
     document.querySelector("#songlist").insertAdjacentHTML("beforeend", songHtml);
-    }
-    document.querySelector("#songlist li:last-child").addEventListener("click", removeSong);
+  }
+
+  const removeButtons = document.querySelectorAll("#songlist li button");
+  for (const button of removeButtons) {
+    button.addEventListener("click", removeSong);
+  }
 }
 
 function removeSong() {
   console.log("remove song");
+  playlist.pop();
 }
