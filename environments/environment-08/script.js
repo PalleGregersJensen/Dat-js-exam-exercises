@@ -10,11 +10,13 @@
 
 "use strict";
 
+let playlist = [];
+
 window.addEventListener("load", start);
 
 async function start() {
   console.log("JS kører");
-  const playlist = await getJsonData();
+  playlist = await getJsonData();
   showSongs(playlist);
 }
 
@@ -27,6 +29,7 @@ async function getJsonData() {
 }
 
 function showSongs(songs) {
+  document.querySelector("#songlist").innerHTML = "";
   for (const song of songs) {
     const songHtml = /*html*/ `<li>${song.title} - ${song.artist} <button>Remove</button></li>`;
     document.querySelector("#songlist").insertAdjacentHTML("beforeend", songHtml);
@@ -34,11 +37,22 @@ function showSongs(songs) {
 
   const removeButtons = document.querySelectorAll("#songlist li button");
   for (const button of removeButtons) {
-    button.addEventListener("click", removeSong);
+    button.addEventListener("click", GoToRemoveSong);
   }
 }
 
-function removeSong() {
+function GoToRemoveSong(event) {
+  const liElement = event.target.parentElement;
+  const songIndex = Array.from(liElement.parentElement.children).indexOf(liElement);
+  const songToRemove = playlist[songIndex];
+  removeSong(songToRemove)
+}
+
+function removeSong(song) {
   console.log("remove song");
-  playlist.pop();
+  const index = playlist.indexOf(song);
+  if(index !== -1) {
+    playlist.splice(index, 1);
+    showSongs(playlist);
+  }
 }
