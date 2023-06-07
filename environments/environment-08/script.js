@@ -10,50 +10,50 @@
 
 "use strict";
 
-let count = 0;
-
 let songList = [
-  { artist: "Drake", title: "Whatever", duration: 3.21, count: 0 },
-  { artist: "Cypress Hill", title: "How I could just kill a man", duration: 3.25, count: 0 },
-  { artist: "The streets", title: "Blinded by the light", duration: 5.46, count: 0 },
+  { artist: "Drake", title: "Whatever", duration: "3:21", count: 0 },
+  { artist: "Cypress Hill", title: "How I could just kill a man", duration: "3:25", count: 0 },
+  { artist: "The streets", title: "Blinded by the light", duration: "5:46", count: 0 },
 ];
 
 window.addEventListener("load", start);
 
 function start() {
-    console.log("Js kører");
-    console.log(songList);
-    showSongs(songList);
+  console.log("Js kører");
+  showSongs(songList);
 }
 
 function showSongs(songs) {
+  const songListElement = document.querySelector("#songlist");
+  songListElement.innerHTML = ""; // Ryd tidligere indhold i #songlist
+
   for (const song of songs) {
     const songHtml = /*html*/ `<li>${song.artist} - ${song.title} - ${song.duration} <button>Upvote</button></li>`;
-    document.querySelector("#songlist").insertAdjacentHTML("beforeend", songHtml);
-    }
-    document.querySelector("#songlist li:last-child button").addEventListener("click", upvoteSong)
+    songListElement.insertAdjacentHTML("beforeend", songHtml);
+  }
 
- const upvoteButtons = document.querySelectorAll("#songlist li button");
- for (const button of upvoteButtons) {
-   button.addEventListener("click", getToUpvoteSong);
- }
-
-};
-
-function getToUpvoteSong() {
-  upvoteSong(songList)
+  const upvoteButtons = document.querySelectorAll("#songlist li button");
+  for (const button of upvoteButtons) {
+    button.addEventListener("click", upvoteSong);
+  }
 }
 
+function upvoteSong(event) {
+  const button = event.target;
+  console.log(button);
+  const liElement = button.parentElement;
+  console.log(liElement);
+  const songIndex = Array.from(liElement.parentElement.children).indexOf(liElement);
+  console.log(songIndex);
+  const song = songList[songIndex];
+  console.log(song);
 
-function upvoteSong(song) {
-  console.log("button clciked");
-  count++;
-  console.log(count);
-  sortByCount(songList)
-  console.log(songList);
+  song.count++;
+  sortByCount(songList);
+  showSongs(songList);
 }
 
 function sortByCount(songs) {
-  console.log("point tilføjet");
-  songList.sort((a, b) => a.count - b.count);
+  songs.sort((a, b) => b.count - a.count);
 }
+
