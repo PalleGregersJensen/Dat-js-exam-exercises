@@ -11,14 +11,16 @@
 "use strict";
 
 let products = [];
+let basket = [];
 
 window.addEventListener("load", start);
 
 async function start() {
   console.log("JS kører");
   products = await getJsonData();
-    console.log(products);
-    showProducts(products);
+  console.log(products);
+  showProducts(products);
+  document.querySelector("#products button").addEventListener("click", addToBasket);
 }
 
 async function getJsonData() {
@@ -31,14 +33,44 @@ async function getJsonData() {
 
 function showProducts(productList) {
   for (const product of productList) {
-    const productHtml =
-      /*html*/
-      `<article>
-               <h3>${product.name}</h3>
-               <p>vægt: ${product.weight} g</p>
-               <p>pris: ${product.price},-</p>
-               <button>Læg i kurv</button>
-            </article>`;
+    const productHtml = /*html*/ `<article>
+      <h3>${product.name}</h3>
+      <p>vægt: ${product.weight} g</p>
+      <p>pris: ${product.price},-</p>
+      <button>Læg i kurv</button>
+    </article>`;
     document.querySelector("#products").insertAdjacentHTML("beforeend", productHtml);
+  }
+
+  const buttons = document.querySelectorAll("#products button");
+  buttons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      addToBasket(index);
+    });
+  });
+}
+
+function addToBasket(index) {
+  const selectedProduct = products[index];
+  basket.push(selectedProduct);
+  console.log("Produkt tilføjet til kurven:", selectedProduct);
+  // Opdater visningen af kurven på siden her
+  console.log(basket);
+  showBasket(basket);
+}
+
+function showBasket(basketList) {
+  for (const basketProduct of basketList) {
+    const basketHtml = /*html*/ `<tr>
+              <td>
+                <button class="remove">-</button>
+                  ANTAL
+                <button class="add">+</button>
+              </td>
+              <td>${basketProduct.name}</td>
+              <td>${basketProduct.price}</td>
+              <td>${basketProduct.name}</td>
+            </tr>`;
+    document.querySelector("#basket").insertAdjacentHTML("beforeend", basketHtml);
   }
 }
