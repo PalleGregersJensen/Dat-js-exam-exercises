@@ -15,31 +15,39 @@ let students = [];
 window.addEventListener("load", start);
 
 function start() {
-    console.log("JS kører");
-    document.querySelector("#create-student-form").addEventListener("submit", addStudentObjectToArray);
+  console.log("JS kører");
+  document.querySelector("#create-student-form").addEventListener("submit", addStudentObjectToArray);
 }
 
 function addStudentObjectToArray(event) {
-    event.preventDefault();
-    const form = event.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const age = form.age.value;
-    const newStudent = createStudentObject(name, email, age);
-    students.push(newStudent);
-    console.log(students);
-
+  event.preventDefault();
+  const form = event.target;
+  const name = form.name.value;
+  const email = form.email.value;
+  const age = form.age.value;
+  const newStudent = createStudentObject(name, email, age);
+  console.log(newStudent);
+  students.push(newStudent);
+  console.log(students);
+  checkEmail(students);
 }
 
 function createStudentObject(name, email, age) {
-    const student = {
-        name: name,
-        email: email,
-        age: age,
-    }
-    return student;
+  const student = {
+    name: name,
+    email: email,
+    age: age,
+  };
+  return student;
 }
 
-function checkEmail() {
-    
+function checkEmail(studentList) {
+  const email = document.querySelector("#email").value;
+  if (email.length >= 16 && email.endsWith("@stud.kea.dk")) {
+    console.log("oprettelse lykkedes");
+  } else {
+    console.log("Oprettelse mislykkedes");
+    studentList.pop();
+    console.log(students);
+  }
 }
