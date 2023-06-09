@@ -9,3 +9,36 @@
 // 3. Vis indholdet af kurven på siden (opdatér når der bliver tilføjet et produkt)
 
 "use strict";
+
+let products = [];
+
+window.addEventListener("load", start);
+
+async function start() {
+  console.log("JS kører");
+  products = await getJsonData();
+    console.log(products);
+    showProducts(products);
+}
+
+async function getJsonData() {
+  const response = await fetch("products.json");
+  console.log(response);
+  const data = await response.json();
+  console.log(data);
+  return data;
+}
+
+function showProducts(productList) {
+  for (const product of productList) {
+    const productHtml =
+      /*html*/
+      `<article>
+               <h3>${product.name}</h3>
+               <p>vægt: ${product.weight} g</p>
+               <p>pris: ${product.price},-</p>
+               <button>Læg i kurv</button>
+            </article>`;
+    document.querySelector("#products").insertAdjacentHTML("beforeend", productHtml);
+  }
+}
