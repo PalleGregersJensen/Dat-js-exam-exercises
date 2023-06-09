@@ -12,13 +12,13 @@ import { courses } from "./courses.js";
 window.addEventListener("load", start);
 
 function start() {
-    console.log(courses);
-    showCourses(courses);
-    document.querySelector("#select-filter-ects").addEventListener("change", filterByEcts);
+  console.log(courses);
+  showCourses(courses);
+  document.querySelector("#select-filter-ects").addEventListener("change", filterByEcts);
 }
 
 function showCourses(courseList) {
-    document.querySelector("#courses-list").innerHTML = "";
+  document.querySelector("#courses-list").innerHTML = "";
   for (const course of courseList) {
     const courseHtml =
       /*html*/
@@ -30,38 +30,48 @@ function showCourses(courseList) {
 }
 
 function filterByEcts(courseList) {
-    console.log("change");
-    const ectsFilter = document.querySelector("#select-filter-ects").value;
-    console.log(ectsFilter);
-    if (ectsFilter === 5) {
-        courses.filter(checkEctsFive)
-    } else if (ectsFilter === 10) {
-        courses.filter(checkEctsTen);
-    } else if (ectsFilter === 15) {
-        courses.filter(checkEctsFifteen);
-    } else if (ectsFilter === 20) {
-        courses.filter(checkEctsTwenty);
-    }
-    showCourses(courses);
+  console.log("change");
+  const ectsFilter = Number(document.querySelector("#select-filter-ects").value);
+  console.log(ectsFilter);
+  if (ectsFilter === 5) {
+    const fiveEcts = courses.filter(checkEctsFive);
+    console.log(fiveEcts);
+    showCourses(fiveEcts);
+  } else if (ectsFilter === 10) {
+    const tenEcts = courses.filter(checkEctsTen);
+    console.log(tenEcts);
+    showCourses(tenEcts);
+  } else if (ectsFilter === 15) {
+    const fifteenEcts = courses.filter(checkEctsFifteen);
+    console.log(fifteenEcts);
+    showCourses(fifteenEcts);
+  } else if (ectsFilter === 20) {
+    const twentyEcts = courses.filter(checkEctsTwenty);
+    console.log(twentyEcts);
+    showCourses(twentyEcts);
+  }
 }
 
 function checkEctsFive() {
-    courses.ectsPoints = 5;
-    return courses;
+  courses.ectsPoints = 5;
+  console.log(courses);
+  return courses;
 }
 
 function checkEctsTen() {
-    courses.ectsPoints = 10;
-    return courses;
+  courses.ectsPoints = 10;
+  console.log(courses);
+  return courses;
 }
 
 function checkEctsFifteen() {
-    courses.ectsPoints = 15;
-    return courses;
+  courses.ectsPoints = 15;
+  console.log(courses);
+  return courses;
 }
 
 function checkEctsTwenty() {
-    courses.ectsPoints = 20;
-    return courses;
+  courses.ectsPoints = 20;
+  console.log(courses);
+  return courses;
 }
-
