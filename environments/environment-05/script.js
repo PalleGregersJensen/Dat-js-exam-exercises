@@ -29,7 +29,7 @@ function showCourses(courseList) {
   }
 }
 
-function filterByEcts(courseList) {
+function filterByEcts() {
   console.log("change");
   const ectsFilter = Number(document.querySelector("#select-filter-ects").value);
   console.log(ectsFilter);
@@ -52,26 +52,18 @@ function filterByEcts(courseList) {
   }
 }
 
-function checkEctsFive() {
-  courses.ectsPoints = 5;
-  console.log(courses);
-  return courses;
+function checkEctsFive(course) {
+  return course.ectsPoints === 5;
 }
 
-function checkEctsTen() {
-  courses.ectsPoints = 10;
-  console.log(courses);
-  return courses;
+function checkEctsTen(course) {
+  return course.ectsPoints === 10;
 }
 
-function checkEctsFifteen() {
-  courses.ectsPoints = 15;
-  console.log(courses);
-  return courses;
+function checkEctsFifteen(course) {
+  return course.ectsPoints === 15;
 }
 
-function checkEctsTwenty() {
-  courses.ectsPoints = 20;
-  console.log(courses);
-  return courses;
+function checkEctsTwenty(course) {
+  return course.ectsPoints === 20;
 }
