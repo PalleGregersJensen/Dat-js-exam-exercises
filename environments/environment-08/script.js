@@ -11,9 +11,9 @@
 "use strict";
 
 const songs = [
-  { artist: "Mew", title: "Mew-song", duration: "3:21" },
-  { artist: "Racing Decays", title: "Drunk all day", duration: "2:46" },
-  { artist: "Lukas Graham", title: "Lukas Graham-song", duration: "3:45" },
+  { artist: "Mew", title: "Mew-song", duration: "3:21", count: 0 },
+  { artist: "Racing Decays", title: "Drunk all day", duration: "2:46", count: 0 },
+  { artist: "Lukas Graham", title: "Lukas Graham-song", duration: "3:45", count: 0 },
 ];
 
 window.addEventListener("load", start);
@@ -25,8 +25,32 @@ function start() {
 }
 
 function showSongs(songList) {
+    document.querySelector("#songlist").innerHTML = "";
   for (const song of songList) {
     const songHtml = /*html*/ `<li>${song.artist} - ${song.title} - ${song.duration} <button>Upvote</button></li>`;
     document.querySelector("#songlist").insertAdjacentHTML("beforeend", songHtml);
+    }
+      const upvoteButtons = document.querySelectorAll("#songlist li button");
+  for (const button of upvoteButtons) {
+    button.addEventListener("click", upvoteSong);
   }
+}
+
+function upvoteSong(event) {
+  const button = event.target;
+  console.log(button);
+  const liElement = button.parentElement;
+  console.log(liElement);
+  const songIndex = Array.from(liElement.parentElement.children).indexOf(liElement);
+  console.log(songIndex);
+  const song = songs[songIndex];
+  console.log(song);
+
+  song.count++;
+  sortByCount(songs);
+  showSongs(songs);
+}
+
+function sortByCount(songs) {
+  songs.sort((a, b) => b.count - a.count);
 }
