@@ -30,8 +30,8 @@ function addNewSongObjectToArray(event) {
   songs.push(newSong);
   console.log(newSong);
   console.log(songs);
-//   sortByArtist();
-//   sortByTitle();
+  sortByArtist();
+  sortByTitle();
   showSongs(songs);
   form.reset();
 }
@@ -56,10 +56,10 @@ function showSongs(songList) {
 
 function handleBySort() {
   console.log("læses dette?");
-  const artist = document.querySelector("#sort-artist").value;
-  const title = document.querySelector("#sort-title").value;
-  console.log(artist.value);
-  console.log(title.value);
+  const artist = document.querySelector("#sort-artist").checked;
+  const title = document.querySelector("#sort-title").checked;
+  console.log(artist.checked);
+  console.log(title.checked);
   if (artist) {
     sortByArtist();
   } else if (title) {
@@ -70,11 +70,11 @@ function handleBySort() {
 function sortByArtist() {
   console.log("læses dette?");
   songs.sort((a, b) => a.artist.localeCompare(b.artist));
-//   showSongs(songs);
+  showSongs(songs);
 }
 
 function sortByTitle() {
   console.log("læses dette?");
   songs.sort((a, b) => a.title.localeCompare(b.title));
-//   showSongs(songs);
+  showSongs(songs);
 }
